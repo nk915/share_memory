@@ -11,21 +11,18 @@ int main()
 	int shmid;
 
 	// 공유메모리 공간을 만든다.
-	shmid = shmget((key_t)3836, sizeof(SHM_INFOS)*SHM_INFO_COUNT, 0666|IPC_CREAT);
+	shmid = shmget((key_t)3836, SHARED_MEMORY_SIZE, 0666|IPC_CREAT);
 
-	if (shmid == -1)
-	{
+	if (shmid == -1) {
 		perror("shmget failed : ");
 		exit(0);
 	}
 
-	if ( -1 == shmctl( shmid, IPC_RMID, 0))
-	{
+	if ( -1 == shmctl( shmid, IPC_RMID, 0)) {
 		printf( "공유 메모리 제거 실패\n");
 		return -1;
 	}
-	else
-	{
+	else {
 		printf( "공유 메모리 제거 성공\n");
 	}
 	return 0;
